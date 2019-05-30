@@ -9,7 +9,7 @@ SDK.CSSValue = class {
    * @param {!Protocol.CSS.Value} payload
    */
   constructor(payload) {
-    this.text = payload.text;
+    this.text = Array.isArray(payload) ? payload.join(', ') : payload.text || payload.value || payload;
     if (payload.range)
       this.range = TextUtils.TextRange.fromObject(payload.range);
   }

@@ -609,7 +609,7 @@ ObjectUI.JavaScriptAutocomplete = class {
       return true;
     const result =
         await currentExecutionContext.runtimeModel.compileScript(expression, '', false, currentExecutionContext.id);
-    if (!result.exceptionDetails)
+    if (!result || !result.exceptionDetails)
       return true;
     const description = result.exceptionDetails.exception.description;
     return !description.startsWith('SyntaxError: Unexpected end of input') &&

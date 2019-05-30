@@ -8,6 +8,7 @@ var parseURL = require('url').parse;
 
 var utils = require('../utils');
 
+const noProxy = Boolean(process.env.NO_PROXY);
 const remoteDebuggingPort = parseInt(process.env.REMOTE_DEBUGGING_PORT, 10) || 9222;
 const serverPort = parseInt(process.env.PORT, 10) || 8090;
 const localProtocolPath = process.env.LOCAL_PROTOCOL_PATH;
@@ -87,7 +88,7 @@ function cloudURL(path, commitHash) {
 var proxyFileCache = new Map();
 
 function proxy(filePath) {
-  if (!(filePath in proxyFilePathToURL))
+  if (noProxy || !(filePath in proxyFilePathToURL))
     return null;
   if (localProtocolPath && filePath === '/front_end/InspectorBackendCommands.js')
     return serveLocalProtocolFile();

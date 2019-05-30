@@ -11,8 +11,9 @@ SDK.CSSMediaQuery = class {
   constructor(payload) {
     this._active = payload.active;
     this._expressions = [];
-    for (let j = 0; j < payload.expressions.length; ++j)
-      this._expressions.push(SDK.CSSMediaQueryExpression.parsePayload(payload.expressions[j]));
+    var payloadExpressions = Array.isArray(payload) ? payload : payload.expressions || [];
+    for (let j = 0; j < payloadExpressions.length; ++j)
+      this._expressions.push(SDK.CSSMediaQueryExpression.parsePayload(payloadExpressions[j]));
   }
 
   /**

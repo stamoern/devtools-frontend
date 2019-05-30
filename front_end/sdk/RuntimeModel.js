@@ -123,7 +123,7 @@ SDK.RuntimeModel = class extends SDK.SDKModel {
   _executionContextCreated(context) {
     const data = context.auxData || {isDefault: true};
     const executionContext =
-        new SDK.ExecutionContext(this, context.id, context.name, context.origin, data['isDefault'], data['frameId']);
+        new SDK.ExecutionContext(this, context.id, context.name, context.origin || '', data['isDefault'], context.frameId || data['frameId']);
     this._executionContextById.set(executionContext.id, executionContext);
     this.dispatchEventToListeners(SDK.RuntimeModel.Events.ExecutionContextCreated, executionContext);
   }
